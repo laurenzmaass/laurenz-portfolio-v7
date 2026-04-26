@@ -166,7 +166,7 @@ export default function AboutPage() {
               {/* CTA */}
               <Link
                 href="/contact"
-                className="block w-full text-center bg-ink text-paper font-sans text-sm font-medium py-3.5 hover:bg-accent transition-colors duration-200"
+                className="block w-full text-center border border-ink text-ink font-sans text-sm font-medium py-3.5 hover:bg-ink hover:text-paper transition-colors duration-200"
               >
                 Get in touch
               </Link>

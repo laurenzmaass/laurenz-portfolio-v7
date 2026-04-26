@@ -17,7 +17,7 @@ export function Nav() {
   return (
     <header
       role="banner"
-      className="fixed top-0 left-0 right-0 z-[20] mix-blend-multiply"
+      className="fixed top-0 left-0 right-0 z-[20] bg-paper/80 backdrop-blur-md"
     >
       <div className="flex items-center justify-between px-5 md:px-10 py-5">
         {/* Wordmark */}

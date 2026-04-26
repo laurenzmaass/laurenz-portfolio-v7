@@ -62,7 +62,7 @@ export default function HomePage() {
               <div className="flex flex-col items-start gap-3">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-3 bg-ink text-paper font-sans text-sm font-medium px-6 py-3.5 hover:bg-accent transition-colors duration-200"
+                  className="inline-flex items-center gap-3 border border-ink text-ink font-sans text-sm font-medium px-6 py-3.5 hover:bg-ink hover:text-paper transition-colors duration-200"
                 >
                   Get in touch
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
