@@ -32,55 +32,104 @@ export default async function CaseStudyPage({ params }: PageProps) {
   if (!project) notFound()
 
   const { prev, next } = getAdjacentProjects(slug)
+  const { theme } = project
 
   return (
     <>
       <ScrollProgress />
 
-      {/* Case study header */}
-      <header className="pt-28 border-b border-border" style={{ backgroundColor: project.color }}>
+      {/* ── Dark immersive case study header ── */}
+      <header
+        className="pt-28"
+        style={{
+          backgroundColor: theme.pageBg,
+          borderBottom: `1px solid ${theme.accent}20`,
+        }}
+      >
         <Container>
           <FadeIn>
+            {/* Breadcrumb */}
             <nav aria-label="Breadcrumb" className="mb-8">
               <ol className="flex items-center gap-2 list-none m-0 p-0">
                 <li>
-                  <Link href="/work" className="font-mono text-xs text-muted hover:text-ink transition-colors duration-150">
+                  <Link
+                    href="/work"
+                    className="font-mono text-xs transition-opacity duration-150 hover:opacity-70"
+                    style={{ color: theme.muted }}
+                  >
                     Work
                   </Link>
                 </li>
-                <li className="font-mono text-xs text-subtle" aria-hidden="true">/</li>
+                <li className="font-mono text-xs" style={{ color: theme.muted }} aria-hidden="true">/</li>
                 <li>
-                  <span className="font-mono text-xs text-ink">{project.client}</span>
+                  <span className="font-mono text-xs" style={{ color: theme.text }}>{project.client}</span>
                 </li>
               </ol>
             </nav>
 
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-12 pb-16 items-end">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 pb-16 items-center">
               {/* Left: title + meta */}
               <div>
+                {/* Meta tags — styled for dark bg */}
                 <div className="flex flex-wrap items-center gap-2 mb-6">
-                  <Tag>{project.typeLabel}</Tag>
-                  <Tag>{project.year}</Tag>
-                  {project.fictional && <Tag className="text-muted italic">fictional</Tag>}
+                  {[project.typeLabel, project.year].map((label) => (
+                    <span
+                      key={label}
+                      className="font-mono text-[0.6875rem] px-2.5 py-1 rounded-[2px]"
+                      style={{
+                        color: theme.muted,
+                        border: `1px solid ${theme.accent}35`,
+                        background: `${theme.accent}10`,
+                      }}
+                    >
+                      {label}
+                    </span>
+                  ))}
+                  {project.fictional && (
+                    <span
+                      className="font-mono text-[0.6875rem] italic px-2.5 py-1 rounded-[2px]"
+                      style={{
+                        color: theme.muted,
+                        border: `1px solid ${theme.accent}20`,
+                        background: `${theme.accent}08`,
+                      }}
+                    >
+                      fictional
+                    </span>
+                  )}
                 </div>
 
-                <h1 className="font-display italic text-[clamp(2.5rem,7vw,5rem)] leading-[1.0] tracking-[-0.03em] mb-3 max-w-[20ch]">
+                <h1
+                  className="font-display italic text-[clamp(2.5rem,7vw,5rem)] leading-[1.0] tracking-[-0.03em] mb-3 max-w-[20ch]"
+                  style={{ color: theme.text }}
+                >
                   {project.client}
                 </h1>
-                <p className="font-sans font-light text-xl text-muted mb-10 max-w-[44ch]">
+                <p
+                  className="font-sans font-light text-xl mb-10 max-w-[44ch]"
+                  style={{ color: theme.muted }}
+                >
                   {project.title}
                 </p>
 
-                <div className="border-l-2 border-accent pl-6 py-1">
-                  <p className="font-display italic text-[3rem] leading-none tracking-[-0.02em] text-ink">
+                <div className="border-l-2 pl-6 py-1" style={{ borderColor: theme.accent }}>
+                  <p
+                    className="font-display italic text-[3rem] leading-none tracking-[-0.02em]"
+                    style={{ color: theme.accent }}
+                  >
                     {project.outcome.stat}
                   </p>
-                  <p className="font-mono text-xs text-muted mt-1">{project.outcome.label}</p>
+                  <p className="font-mono text-xs mt-1" style={{ color: theme.muted }}>
+                    {project.outcome.label}
+                  </p>
                 </div>
               </div>
 
               {/* Right: project visual */}
-              <div className="hidden lg:block aspect-[4/3] border border-border overflow-hidden">
+              <div
+                className="hidden lg:block aspect-[4/3] overflow-hidden"
+                style={{ border: `1px solid ${theme.accent}25` }}
+              >
                 <ProjectVisual slug={slug} className="w-full h-full" />
               </div>
             </div>
@@ -88,7 +137,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
         </Container>
       </header>
 
-      {/* Article body */}
+      {/* ── Article body ── */}
       <article aria-label={`${project.client} case study`}>
         {/* Stack strip */}
         <div className="border-b border-border bg-paper">
@@ -139,7 +188,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
         </Container>
       </article>
 
-      {/* Project nav */}
+      {/* ── Project nav ── */}
       <nav className="border-t border-border" aria-label="Case study navigation">
         <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-border">
           {prev ? (

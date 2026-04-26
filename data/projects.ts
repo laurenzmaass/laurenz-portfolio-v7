@@ -1,3 +1,10 @@
+export interface ProjectTheme {
+  pageBg: string  // dark case study header background
+  accent: string  // vibrant project accent (stats, highlights)
+  text: string    // primary text on dark bg
+  muted: string   // secondary/label text on dark bg
+}
+
 export interface Project {
   slug: string
   title: string
@@ -19,7 +26,8 @@ export interface Project {
   solution: string[]
   results: string[]
   reflection: string[]
-  color: string
+  hoverTint: string    // subtle row hover bg (work index / homepage)
+  theme: ProjectTheme  // full dark theme for case study header
 }
 
 export const projects: Project[] = [
@@ -60,7 +68,13 @@ export const projects: Project[] = [
       'The hardest part was Shopify\'s webhook retry logic, which I hadn\'t fully accounted for in the initial design. The fix was simple once identified, but it reinforced a rule I now follow on every automation: assume the API will do something unexpected and build idempotency in from the start.',
       'I also deliberately kept the Slack output readable by a human who wasn\'t in the room when it was built. Terse automation output that requires context to interpret is just technical debt you pay every time someone new joins.',
     ],
-    color: '#EDE9E2',
+    hoverTint: '#EDF5EF',
+    theme: {
+      pageBg: '#040F08',
+      accent: '#22C55E',
+      text:   '#D4EDD9',
+      muted:  '#6B9A72',
+    },
   },
   {
     slug: 'basecamp-studio',
@@ -99,7 +113,13 @@ export const projects: Project[] = [
       'The hardest creative call was restraint. My first draft had too much happening — the cursor effect, an animated counter on the hero, a marquee with client names. Cutting it down to the cursor and the text reveals made every remaining animation more deliberate. The constraint improved the work.',
       'I also learned that "make it look premium" is actually a research problem, not just a design problem. The visual language only worked because we had done the positioning work first. A beautiful template without clear positioning is just expensive-looking nothing.',
     ],
-    color: '#F5F2EC',
+    hoverTint: '#FAF4EC',
+    theme: {
+      pageBg: '#120B03',
+      accent: '#E8943A',
+      text:   '#F5E6C8',
+      muted:  '#B8946A',
+    },
   },
   {
     slug: 'wanderfurther',
@@ -139,7 +159,13 @@ export const projects: Project[] = [
       'This project reinforced something I\'ve become convinced of: the framework is usually the wrong starting point. Starting with constraints — what do I actually need this to do? — tends to produce better architecture than starting with a scaffold.',
       'The Airtable-as-CMS approach has one significant limitation: there\'s no live preview. Drafts only become visible after a deploy. For a solo blog, that\'s a non-issue. For a client, I\'d think carefully about whether the content editing experience is acceptable before recommending it.',
     ],
-    color: '#EDE9E2',
+    hoverTint: '#EBF5FB',
+    theme: {
+      pageBg: '#020C14',
+      accent: '#38BDF8',
+      text:   '#C8E6F5',
+      muted:  '#6899B4',
+    },
   },
   {
     slug: 'relais-consulting',
@@ -178,7 +204,13 @@ export const projects: Project[] = [
       'Version one of this automation broke on clients with non-EU timezones — the Calendly integration was generating booking links with the wrong availability window. The fix required adding a timezone field to the Typeform and passing it to the Calendly API. A lesson in testing with real-world edge cases before declaring something production-ready.',
       'The broader lesson: automation surfaces inconsistency in the underlying process. If you can\'t define the exact input you need for a step, you can\'t automate it — and often, the value of the automation project is as much the process clarification as the time saved.',
     ],
-    color: '#EDE9E2',
+    hoverTint: '#F2F0FD',
+    theme: {
+      pageBg: '#060819',
+      accent: '#A78BFA',
+      text:   '#DDD8F8',
+      muted:  '#7A78B0',
+    },
   },
   {
     slug: 'schreiber-co',
@@ -217,7 +249,13 @@ export const projects: Project[] = [
       'My first version of this site had more sections — a "how we work" timeline, an FAQ accordion, a testimonial block. The client pushed back: "our prospective clients are busy. They\'ll read three things and either book a call or not." They were right. Cutting two sections and simplifying the CTA flow improved conversion.',
       'In financial services, less is credibility. Every extra element is an opportunity for something to feel wrong. The discipline of not adding things is harder than adding them.',
     ],
-    color: '#F5F2EC',
+    hoverTint: '#F6F3EC',
+    theme: {
+      pageBg: '#0C0B09',
+      accent: '#D4AF37',
+      text:   '#F0EBD8',
+      muted:  '#9C9080',
+    },
   },
 ]
 

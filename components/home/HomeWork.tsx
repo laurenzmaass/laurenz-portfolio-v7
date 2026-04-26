@@ -2,11 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import type { Project } from '@/data/projects'
 import { Container } from '@/components/layout/Container'
 import { Tag } from '@/components/ui/Tag'
-import { ProjectVisual } from '@/components/work/ProjectVisual'
 
 const easeOut = [0.16, 1, 0.3, 1] as const
 
@@ -39,8 +38,10 @@ export function HomeWork({ projects }: HomeWorkProps) {
           {projects.map((project, i) => (
             <li
               key={project.slug}
-              className={activeSlug === project.slug ? 'bg-surface' : ''}
-              style={{ transition: 'background-color 200ms ease' }}
+              style={{
+                backgroundColor: activeSlug === project.slug ? project.hoverTint : '',
+                transition: 'background-color 200ms ease',
+              }}
             >
               <Link
                 href={`/work/${project.slug}`}
@@ -55,7 +56,6 @@ export function HomeWork({ projects }: HomeWorkProps) {
                   viewport={{ once: true, margin: '-60px' }}
                   transition={{ duration: 0.6, delay: i * 0.1, ease: easeOut }}
                 >
-                  {/* Always-visible compact row */}
                   <div className="flex flex-col sm:flex-row sm:items-start gap-4 py-8">
                     <div className="flex items-center gap-4 sm:w-56 shrink-0">
                       <span className="font-mono text-xs text-muted w-6">{String(i + 1).padStart(2, '0')}</span>
@@ -77,27 +77,6 @@ export function HomeWork({ projects }: HomeWorkProps) {
                       <p className="font-mono text-xs text-muted max-w-[16ch] sm:text-right">{project.outcome.label}</p>
                     </div>
                   </div>
-
-                  {/* Expand on hover — shows visual */}
-                  <AnimatePresence>
-                    {activeSlug === project.slug && (
-                      <motion.div
-                        key="preview"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: easeOut }}
-                        className="overflow-hidden"
-                        aria-hidden="true"
-                      >
-                        <div className="pb-8">
-                          <div className="aspect-[4/1.5] sm:aspect-[4/1.2] lg:aspect-[4/0.9] border border-border overflow-hidden w-full max-w-2xl">
-                            <ProjectVisual slug={project.slug} className="w-full h-full" />
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </motion.div>
               </Link>
             </li>
