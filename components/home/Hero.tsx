@@ -127,7 +127,7 @@ export function Hero() {
           >
             <Link
               href="/work"
-              className="inline-flex items-center gap-3 bg-ink text-paper font-sans text-sm font-medium px-5 py-3 hover:bg-accent transition-colors duration-200 whitespace-nowrap"
+              className="inline-flex items-center gap-3 border border-ink text-ink font-sans text-sm font-medium px-5 py-3 hover:bg-ink hover:text-paper transition-colors duration-200 whitespace-nowrap"
             >
               View work
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
