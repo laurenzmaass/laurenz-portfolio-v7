@@ -4,6 +4,7 @@ import { getFeaturedProjects } from '@/data/projects'
 import { Hero } from '@/components/home/Hero'
 import { HomeWork } from '@/components/home/HomeWork'
 import { ProcessSection } from '@/components/home/ProcessSection'
+import { Marquee } from '@/components/home/Marquee'
 import { Container } from '@/components/layout/Container'
 import { FadeIn } from '@/components/motion/FadeIn'
 
@@ -38,6 +39,7 @@ export default function HomePage() {
       />
 
       <Hero />
+      <Marquee />
       <HomeWork projects={featured} />
       <ProcessSection />
 

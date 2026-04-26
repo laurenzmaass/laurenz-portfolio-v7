@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Container } from '@/components/layout/Container'
 import { FadeIn } from '@/components/motion/FadeIn'
 import { Tag } from '@/components/ui/Tag'
+import { WorkflowDiagram } from '@/components/about/WorkflowDiagram'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -70,6 +71,15 @@ export default function AboutPage() {
                     <strong className="font-medium text-ink">Operations thinking.</strong> Sometimes the right deliverable isn&#39;t a website or a workflow — it&#39;s a clearer process, a better information architecture, a more honest scoping conversation. I don&#39;t always bring this up unprompted, but it&#39;s always part of how I think.
                   </p>
                 </div>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.12}>
+              <div className="mb-12">
+                <p className="font-mono text-xs text-muted uppercase tracking-[0.12em] mb-6">
+                  A typical engagement
+                </p>
+                <WorkflowDiagram />
               </div>
             </FadeIn>
 
