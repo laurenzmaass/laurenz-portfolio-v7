@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
 export function CustomCursor() {
   const [visible, setVisible] = useState(false)
   const [isPointer, setIsPointer] = useState(false)
   const [isText, setIsText] = useState(false)
+  const [isDark, setIsDark] = useState(false)
 
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
@@ -17,7 +18,6 @@ export function CustomCursor() {
 
   const dotX = useTransform(mouseX, (v) => v - 4)
   const dotY = useTransform(mouseY, (v) => v - 4)
-
   const rX = useTransform(ringX, (v) => v - 16)
   const rY = useTransform(ringY, (v) => v - 16)
 
@@ -47,6 +47,7 @@ export function CustomCursor() {
         tagName === 'textarea' ||
         (target as HTMLElement)?.isContentEditable
       )
+      setIsDark(!!target.closest('[data-dark-bg]'))
     }
 
     const onLeave = () => setVisible(false)
@@ -69,20 +70,16 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Dot — white + difference blend: appears dark on light, light on dark */}
+      {/* Dot */}
       <motion.div
         aria-hidden="true"
         className="fixed top-0 left-0 pointer-events-none z-[9999]"
         style={{ x: dotX, y: dotY }}
-        animate={{
-          opacity: visible ? 1 : 0,
-          scale: isPointer ? 0 : 1,
-        }}
+        animate={{ opacity: visible ? 1 : 0, scale: isPointer ? 0 : 1 }}
         transition={{ duration: 0.12 }}
       >
         <div
-          className="w-2 h-2 rounded-full bg-white"
-          style={{ mixBlendMode: 'difference' }}
+          className={`w-2 h-2 rounded-full transition-colors duration-150 ${isDark ? 'bg-white' : 'bg-ink'}`}
         />
       </motion.div>
 
@@ -98,8 +95,7 @@ export function CustomCursor() {
         transition={{ duration: 0.18, ease: 'easeOut' }}
       >
         <div
-          className="w-8 h-8 rounded-full border border-white"
-          style={{ mixBlendMode: 'difference' }}
+          className={`w-8 h-8 rounded-full border transition-colors duration-150 ${isDark ? 'border-white/50' : 'border-ink/30'}`}
         />
       </motion.div>
     </>

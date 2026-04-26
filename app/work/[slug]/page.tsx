@@ -40,6 +40,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
       {/* ── Dark immersive case study header ── */}
       <header
+        data-dark-bg
         className="pt-28"
         style={{
           backgroundColor: theme.pageBg,
@@ -152,27 +153,27 @@ export default async function CaseStudyPage({ params }: PageProps) {
         </div>
 
         <Container narrow>
-          <Section title="The problem" label="01 / Problem">
+          <Section title="The problem" label="01 / Problem" accent={theme.accent}>
             {project.problem.map((para, i) => (
               <p key={i} className="font-sans text-base text-ink/80 leading-relaxed mb-4 last:mb-0">{para}</p>
             ))}
           </Section>
 
-          <Section title="The approach" label="02 / Approach">
+          <Section title="The approach" label="02 / Approach" accent={theme.accent}>
             {project.approach.map((para, i) => (
               <p key={i} className="font-sans text-base text-ink/80 leading-relaxed mb-4 last:mb-0">{para}</p>
             ))}
           </Section>
 
-          <Section title="The solution" label="03 / Solution">
+          <Section title="The solution" label="03 / Solution" accent={theme.accent}>
             {project.solution.map((para, i) => (
               <p key={i} className="font-sans text-base text-ink/80 leading-relaxed mb-4 last:mb-0">{para}</p>
             ))}
           </Section>
 
-          <Section title="Results" label="04 / Outcome">
-            <div className="bg-surface p-6 mb-6 border-l-2 border-accent">
-              <p className="font-display italic text-[2.5rem] leading-none tracking-[-0.02em] text-ink">{project.outcome.stat}</p>
+          <Section title="Results" label="04 / Outcome" accent={theme.accent}>
+            <div className="p-6 mb-6 border-l-2" style={{ background: project.hoverTint, borderColor: theme.accent }}>
+              <p className="font-display italic text-[2.5rem] leading-none tracking-[-0.02em]" style={{ color: theme.accent }}>{project.outcome.stat}</p>
               <p className="font-mono text-xs text-muted mt-1">{project.outcome.label}</p>
             </div>
             {project.results.map((para, i) => (
@@ -180,7 +181,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
             ))}
           </Section>
 
-          <Section title="Reflection" label="05 / Reflection">
+          <Section title="Reflection" label="05 / Reflection" accent={theme.accent}>
             {project.reflection.map((para, i) => (
               <p key={i} className="font-sans text-base text-ink/80 leading-relaxed mb-4 last:mb-0">{para}</p>
             ))}
@@ -208,11 +209,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
         </div>
       </nav>
 
-      <div className="section-padding bg-surface border-t border-border">
+      <div className="py-5 bg-surface border-t border-border">
         <Container>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="font-sans text-sm text-muted">Interested in working together?</p>
-            <Link href="/contact" className="font-sans text-sm font-medium text-ink border border-ink px-5 py-2.5 hover:bg-ink hover:text-paper transition-colors duration-200">
+            <Link href="/contact" className="font-sans text-sm font-medium text-ink border border-ink px-5 py-2 hover:bg-ink hover:text-paper transition-colors duration-200">
               Get in touch
             </Link>
           </div>
@@ -222,11 +223,17 @@ export default async function CaseStudyPage({ params }: PageProps) {
   )
 }
 
-function Section({ title, label, children }: { title: string; label: string; children: React.ReactNode }) {
+function Section({ title, label, accent, children }: {
+  title: string
+  label: string
+  accent: string
+  children: React.ReactNode
+}) {
   return (
     <FadeIn>
       <section className="py-12 border-b border-border last:border-0">
         <div className="mb-6">
+          <div className="w-8 h-px mb-3" style={{ background: accent }} />
           <p className="font-mono text-xs text-muted uppercase tracking-[0.12em] mb-2">{label}</p>
           <h2 className="font-display italic text-2xl leading-tight tracking-[-0.01em]">{title}</h2>
         </div>
