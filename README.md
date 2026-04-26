@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Laurenz Portfolio v7
 
-## Getting Started
+Flagship portfolio site. Next.js 16 + Tailwind v4 + Framer Motion. See `PLAN.md` for the full design rationale.
 
-First, run the development server:
+## Design rationale
+
+**Creative direction: Continental Precision.** Light mode primary (warm cream base, near-black type, deep forest green accent). Typography pairs Newsreader (high-contrast editorial serif for display text) with Plus Jakarta Sans (clean grotesque for UI/body) and JetBrains Mono (metadata and tags). Motion is precise and mechanical — no spring bounce, no gratuitous animation. Every transition serves information hierarchy.
+
+## Stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 16 (App Router, full SSG) |
+| Styling | Tailwind CSS v4 + CSS Custom Properties |
+| Animations | Framer Motion (UI) + GSAP (scroll choreography) |
+| Smooth scroll | Lenis |
+| Fonts | next/font/google — Newsreader, Plus Jakarta Sans, JetBrains Mono |
+| Forms | react-hook-form + Zod v4 |
+| Contact | Formspree (replace endpoint with real form ID) |
+| Deployment | Vercel |
+
+## Local setup
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Swapping fictional content for real
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Every invented element is marked in TypeScript data files with:
 
-## Learn More
+```ts
+client: 'Vorwerk Digital', /* FICTIONAL: client name and all details */
+```
 
-To learn more about Next.js, take a look at the following resources:
+Search the codebase for `FICTIONAL` to find every item needing replacement.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**`data/projects.ts`** — case study data. Update `client`, `title`, `summary`, `problem`, `approach`, `solution`, `results`, `reflection`, `stack`, and set `fictional: false` for each real project.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Fields to update before going live:**
 
-## Deploy on Vercel
+| File | What to update |
+|------|---|
+| `app/layout.tsx` | `metadataBase`, title, description, OG URL |
+| `app/layout.tsx` | Hero — replace `M.` with real surname initial |
+| `app/sitemap.ts` | `baseUrl` |
+| `app/robots.ts` | sitemap URL |
+| `components/layout/Footer.tsx` | GitHub and LinkedIn URLs |
+| `app/contact/page.tsx` | email address |
+| `app/page.tsx` | email in CTA section |
+| `components/contact/ContactForm.tsx` | Formspree endpoint |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Adding new case studies
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Add a `Project` object to the `projects` array in `data/projects.ts`. The `slug` field becomes the URL path `/work/[slug]`. Run `npm run build` to regenerate static pages.
+
+## Deployment
+
+1. Push to GitHub
+2. Connect to Vercel (auto-detects Next.js)
+3. Set custom domain in Vercel dashboard
+
+## Performance / accessibility scorecard
+
+*Update after final Lighthouse audit*
+
+| Metric | Target | Actual |
+|---|---|---|
+| Performance | ≥ 95 | — |
+| Accessibility | ≥ 95 | — |
+| Best Practices | ≥ 95 | — |
+| SEO | ≥ 95 | — |
+
+All pages prerendered at build time (SSG). Fonts loaded via `next/font` with automatic fallback metrics — zero CLS. Lenis smooth scroll disabled at `prefers-reduced-motion: reduce`. All animations respect `prefers-reduced-motion`. Custom focus states on every interactive element. Skip navigation link present.
