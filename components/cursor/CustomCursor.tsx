@@ -11,21 +11,17 @@ export function CustomCursor() {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  /* Ring trails behind with spring */
   const springConfig = { stiffness: 350, damping: 38, mass: 0.6 }
   const ringX = useSpring(mouseX, springConfig)
   const ringY = useSpring(mouseY, springConfig)
 
-  /* Dot offset — center the 8×8 dot */
   const dotX = useTransform(mouseX, (v) => v - 4)
   const dotY = useTransform(mouseY, (v) => v - 4)
 
-  /* Ring offset — center the 32×32 ring */
   const rX = useTransform(ringX, (v) => v - 16)
   const rY = useTransform(ringY, (v) => v - 16)
 
   useEffect(() => {
-    /* Only show custom cursor on pointer-fine devices */
     const mq = window.matchMedia('(pointer: fine)')
     if (!mq.matches) return
 
@@ -73,7 +69,7 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Dot */}
+      {/* Dot — white + difference blend: appears dark on light, light on dark */}
       <motion.div
         aria-hidden="true"
         className="fixed top-0 left-0 pointer-events-none z-[9999]"
@@ -84,7 +80,10 @@ export function CustomCursor() {
         }}
         transition={{ duration: 0.12 }}
       >
-        <div className="w-2 h-2 rounded-full bg-ink" />
+        <div
+          className="w-2 h-2 rounded-full bg-white"
+          style={{ mixBlendMode: 'difference' }}
+        />
       </motion.div>
 
       {/* Ring */}
@@ -99,11 +98,8 @@ export function CustomCursor() {
         transition={{ duration: 0.18, ease: 'easeOut' }}
       >
         <div
-          className="w-8 h-8 rounded-full border border-ink/30 transition-all"
-          style={{
-            borderColor: isPointer ? 'var(--color-accent)' : undefined,
-            borderWidth: isText ? '1.5px' : '1px',
-          }}
+          className="w-8 h-8 rounded-full border border-white"
+          style={{ mixBlendMode: 'difference' }}
         />
       </motion.div>
     </>

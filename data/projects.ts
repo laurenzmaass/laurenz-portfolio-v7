@@ -68,7 +68,7 @@ export const projects: Project[] = [
       'The hardest part was Shopify\'s webhook retry logic, which I hadn\'t fully accounted for in the initial design. The fix was simple once identified, but it reinforced a rule I now follow on every automation: assume the API will do something unexpected and build idempotency in from the start.',
       'I also deliberately kept the Slack output readable by a human who wasn\'t in the room when it was built. Terse automation output that requires context to interpret is just technical debt you pay every time someone new joins.',
     ],
-    hoverTint: '#EDF5EF',
+    hoverTint: '#C8EDD0',
     theme: {
       pageBg: '#040F08',
       accent: '#22C55E',
@@ -113,7 +113,7 @@ export const projects: Project[] = [
       'The hardest creative call was restraint. My first draft had too much happening — the cursor effect, an animated counter on the hero, a marquee with client names. Cutting it down to the cursor and the text reveals made every remaining animation more deliberate. The constraint improved the work.',
       'I also learned that "make it look premium" is actually a research problem, not just a design problem. The visual language only worked because we had done the positioning work first. A beautiful template without clear positioning is just expensive-looking nothing.',
     ],
-    hoverTint: '#FAF4EC',
+    hoverTint: '#F5DEC0',
     theme: {
       pageBg: '#120B03',
       accent: '#E8943A',
@@ -159,7 +159,7 @@ export const projects: Project[] = [
       'This project reinforced something I\'ve become convinced of: the framework is usually the wrong starting point. Starting with constraints — what do I actually need this to do? — tends to produce better architecture than starting with a scaffold.',
       'The Airtable-as-CMS approach has one significant limitation: there\'s no live preview. Drafts only become visible after a deploy. For a solo blog, that\'s a non-issue. For a client, I\'d think carefully about whether the content editing experience is acceptable before recommending it.',
     ],
-    hoverTint: '#EBF5FB',
+    hoverTint: '#C4E6F7',
     theme: {
       pageBg: '#020C14',
       accent: '#38BDF8',
@@ -204,7 +204,7 @@ export const projects: Project[] = [
       'Version one of this automation broke on clients with non-EU timezones — the Calendly integration was generating booking links with the wrong availability window. The fix required adding a timezone field to the Typeform and passing it to the Calendly API. A lesson in testing with real-world edge cases before declaring something production-ready.',
       'The broader lesson: automation surfaces inconsistency in the underlying process. If you can\'t define the exact input you need for a step, you can\'t automate it — and often, the value of the automation project is as much the process clarification as the time saved.',
     ],
-    hoverTint: '#F2F0FD',
+    hoverTint: '#DDD5FA',
     theme: {
       pageBg: '#060819',
       accent: '#A78BFA',
@@ -249,7 +249,7 @@ export const projects: Project[] = [
       'My first version of this site had more sections — a "how we work" timeline, an FAQ accordion, a testimonial block. The client pushed back: "our prospective clients are busy. They\'ll read three things and either book a call or not." They were right. Cutting two sections and simplifying the CTA flow improved conversion.',
       'In financial services, less is credibility. Every extra element is an opportunity for something to feel wrong. The discipline of not adding things is harder than adding them.',
     ],
-    hoverTint: '#F6F3EC',
+    hoverTint: '#EDE4B0',
     theme: {
       pageBg: '#0C0B09',
       accent: '#D4AF37',
